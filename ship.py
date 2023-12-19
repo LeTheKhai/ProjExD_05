@@ -38,5 +38,5 @@ class Ship(pg.sprite.Sprite):
         current_speed = self.speed if not key_lst[self.speed_up_key] else self.max_speed
         for k, mv in ctrl_keys.items():
             if key_lst[k]:
-                self.rect.move_ip(+current_speed * mv[0], +current_speed * mv[1])  # Use current_speed here
+                self.rect.move_ip(+current_speed * mv[0], +current_speed * mv[1])  # スピード加速処理
         screen.blit(self.image, self.rect)
