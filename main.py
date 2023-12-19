@@ -12,8 +12,8 @@ def main():
     bg_img = pg.image.load(f"{MAIN_DIR}/imgs/bg_ocean.png")
     # クロックの作成
 
-    ship1 = Ship(1, (100, 200))
-    ship2 = Ship(7, (1000, 500))
+    ship1 = Ship(2, (100, 200), pg.K_DOWN, 7)
+    ship2 = Ship(2, (1000, 500), pg.K_s, 7)
     ship1_controls = {
         pg.K_LEFT: (-1, 0),
         pg.K_RIGHT: (1, 0),
