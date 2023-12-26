@@ -18,24 +18,18 @@ move_image_paths = {
 
 
 def restrict_ship_movement(ship, ship_num):
-    if ship_num == 1:
-        # Bounds for ship1: (0, 0) to (1600, 400)
-        min_x, min_y = 0, 0
-        max_x, max_y = WIDTH, 400
-    elif ship_num == 2:
-        # Bounds for ship2: (0, 500) to (1600, 900)
-        min_x, min_y = 0, 500
-        max_x, max_y = WIDTH, HEIGHT
+    ship_bounds = {
+        1: (0, 0, WIDTH, 400),
+        2: (0, 500, WIDTH, HEIGHT)
+    }
 
-    # Correct the ship's position if it's outside the bounds
-    if ship.rect.left < min_x:
-        ship.rect.left = min_x
-    if ship.rect.right > max_x:
-        ship.rect.right = max_x
-    if ship.rect.top < min_y:
-        ship.rect.top = min_y
-    if ship.rect.bottom > max_y:
-        ship.rect.bottom = max_y
+    min_x, min_y, max_x, max_y = ship_bounds.get(ship_num, (0, 0, WIDTH, HEIGHT))
+
+    ship.rect.left = max(min_x, min(ship.rect.left, max_x))
+    ship.rect.top = max(min_y, min(ship.rect.top, max_y))
+    ship.rect.right = min(max_x, max(ship.rect.right, min_x))
+    ship.rect.bottom = min(max_y, max(ship.rect.bottom, min_y))
+
 
 
 class Explosion(pg.sprite.Sprite):
